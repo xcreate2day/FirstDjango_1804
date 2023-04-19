@@ -20,9 +20,15 @@ items = [
 
 
 def home(request):
-   text = """ <h1> "Изучаем django День первый" </h1>
-              <strong> Автор </strong>: <i> Иванов И.П. </i> """
-   return HttpResponse(text)
+   #text = """ <h1> "Изучаем django День первый" </h1>
+   #           <strong> Автор </strong>: <i> Иванов И.П. </i> """
+   #return HttpResponse(text)
+   context = {
+      "name": 'Петров Николай Иванович',
+      "email": "my_mail@mail.ru",
+   }
+   return render(request, "index.html", context)
+
 
 
 def about(request):
@@ -50,8 +56,11 @@ def get_item(request, id):
    return HttpResponseNotFound(f"Item with id={id} not found")
 
 def items_list(request):
-   result = "<h2> Список товаров</h2><ol>"
-   for item in items:
-      result += f"<li><a href='/item/{item['id']}'>Название: {item['name']}</a></li>"
-   result += "</ol>"
-   return HttpResponse(result)
+   # result = "<h2> Список товаров</h2><ol>"
+   # for item in items:
+   #    result += f"<li><a href='/item/{item['id']}'>Название: {item['name']}</a></li>"
+   # result += "</ol>"
+   context = {
+      "items": items
+   }
+   return render(request, "items-list.html", context)
