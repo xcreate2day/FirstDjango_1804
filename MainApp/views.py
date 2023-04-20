@@ -37,7 +37,8 @@ def about(request):
       Отчество: <b>{author["middlename"]}</b><br>
       Фамилия: <b>{author["lastname"]}</b><br>
       телефон: <b>{author["phone"]}</b><br>
-      email: <b>{author["email"]}</b>
+      email: <b>{author["email"]}</b><br>
+      <a href="/">Home</a>
       """
    return HttpResponse(result)
 

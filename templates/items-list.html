@@ -5,11 +5,13 @@
     <title>Title</title>
 </head>
 <body>
+    / <a href = '/'>Home</a> / <a href = '/items'>Список товаров</a> / <a href = '/about'>About</a> /
     <h2>Список товаров</h2>
     <ol>
         {% for item in items %}
             <li><a href ="/item/{{ item.id }}">{{ item.name }}</a></li>
         {% endfor %}
     </ol>
+    <a href = '/'>На главную</a>
 </body>
 </html>
