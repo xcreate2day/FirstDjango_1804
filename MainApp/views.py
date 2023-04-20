@@ -47,12 +47,16 @@ def about(request):
 def get_item(request, id):
    for item in items:
       if int(item["id"]) == id:
-         result = f"""
-                  <h1>Название: {item["name"]}</h1>
-                  <p>количество : {item["quantity"]}</p>
-                  <a href='/items'> Назад </a>
-                  """
-         return HttpResponse(result)
+         # result = f"""
+         #          <h1>Название: {item["name"]}</h1>
+         #          <p>количество : {item["quantity"]}</p>
+         #          <a href='/items'> Назад </a>
+         #          """
+         # return HttpResponse(result)
+         context = {
+            'item': item
+         }
+         return render(request, "item-page.html", context)
    return HttpResponseNotFound(f"Item with id={id} not found")
 
 def items_list(request):
