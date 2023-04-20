@@ -1,27 +1,12 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseNotFound
+from MainApp.models import Item
+from django.core.exceptions import ObjectDoesNotExist
 # Create your views here.
-
-author = {
-   "name": "Иван",
-   "middlename": "Петрович",
-   "lastname": "Иванов",
-   "phone": "8-923-600-01-02",
-   "email": "vasya@mail.ru",
-}
-
-items = [
-   {"id": 1, "name": "Кроссовки abibas" ,"quantity":5},
-   {"id": 2, "name": "Куртка кожаная" ,"quantity":2},
-   {"id": 5, "name": "Coca-cola 1 литр" ,"quantity":12},
-   {"id": 7, "name": "Картофель фри" ,"quantity":0},
-   {"id": 8, "name": "Кепка" ,"quantity":124},
-]
 
 
 def home(request):
-   #text = """ <h1> "Изучаем django День первый" </h1>
-   #           <strong> Автор </strong>: <i> Иванов И.П. </i> """
+   #text = """ """
    #return HttpResponse(text)
    context = {
       "name": 'Петров Николай Иванович',
@@ -32,6 +17,13 @@ def home(request):
 
 
 def about(request):
+   author = {
+      "name": "Иван",
+      "middlename": "Петрович",
+      "lastname": "Иванов",
+      "phone": "8-923-600-01-02",
+      "email": "vasya@mail.ru",
+   }
    result = f"""
       Имя: <b>{author["name"]}</b><br>
       Отчество: <b>{author["middlename"]}</b><br>
@@ -46,15 +38,21 @@ def about(request):
 # url /item/1
 # url /item/2
 def get_item(request, id):
-   for item in items:
-      if int(item["id"]) == id:
-         context = {
-            'item': item
-         }
-         return render(request, "item-page.html", context)
-   return HttpResponseNotFound(f"Item with id={id} not found")
+   # for item in items:
+   #    if int(item["id"]) == id:
+   try:
+      item = Item.objects.get(id=id)
+   except ObjectDoesNotExist:
+      return HttpResponseNotFound(f'Объект с id={id} не найден')
+   else:
+      context = {
+         'item': item
+      }
+      return render(request, "item-page.html", context)
+   #return HttpResponseNotFound(f"Item with id={id} not found")
 
 def items_list(request):
+   items = Item.objects.all()
    context = {
       "items": items
    }
