@@ -1,10 +1,14 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
 {% block content %}
+
+<img width="50px" src="{% static 'django.svg' %}" alt="My image">
 
 {% include 'inc-menu.html' %}
 
-<h1>Приветствую!</h1>
+<h1 class="demo">Приветствую!</h1>
 <span style="color: blue"> Меня зовут: {{ name }}.</span> <br>
     Мой email для связи: {{ email }}
 
