@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseNotFound
-from MainApp.models import Item
 from django.core.exceptions import ObjectDoesNotExist
+from MainApp.models import Item
 # Create your views here.
 
 
@@ -38,8 +38,6 @@ def about(request):
 # url /item/1
 # url /item/2
 def get_item(request, id):
-   # for item in items:
-   #    if int(item["id"]) == id:
    try:
       item = Item.objects.get(id=id)
    except ObjectDoesNotExist:

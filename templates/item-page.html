@@ -1,12 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Item page</title>
-</head>
-<body>
-    / <a href = '/'>Home</a> / <a href = '/items'>Список товаров</a> / <a href = '/about'>About</a> /
-    <h2> {{item.name}}</h2>
-    <div>Количество: {{ item.count| default:"Товар отсутствует" }}</div>
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% include 'inc-menu.html' %}
+
+<h2> {{item.name}}</h2>
+<div> {{item.brand}}</div>
+<div>Количество: {{ item.count| default:"Товар отсутствует" }}</div>
+
+<a href = "{% url 'items-list' %}">Назад</a>
+
+{% endblock %}
